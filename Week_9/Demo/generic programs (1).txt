@@ -1,0 +1,380 @@
+//Q1
+class Sorting {
+
+    public static <T> void swap(T[] arr, T x, T y){
+         int x1=0,y1=0;        
+	 for (int i=0;i< arr.length;i++)
+          if(arr[i].equals(x)){ x1=i; break;}
+         for (int i=0;i< arr.length;i++)
+          if(arr[i].equals(y)){ y1=i; break;}
+         T temp = arr[x1];
+         arr[x1] = arr[y1];
+         arr[y1] = temp;
+    }
+}
+public class SortTest {
+
+    public static void main(String[] args){
+
+        Integer[] nums = {5, 12, 3, 7, 2};
+        Sorting.swap(nums, 12, 2);
+        for (int i=0;i< nums.length;i++)
+          System.out.print(nums[i]+" , "); 
+    }
+}
+
+//Q2
+
+class Student{
+int rNo;
+String name;
+Student(int r,String n){
+rNo=r;
+name=n;
+}
+public String toString(){
+return("name:"+name + ";\t RollNo: "+rNo +"\n");
+}
+}
+// A generic interface for a simple stack.
+ interface IGenSimpleStack<T> {
+
+  // Push an item onto the stack.
+  void push(T item) throws StackFullException;
+
+  // Pop an item from the stack.
+  T pop() throws StackEmptyException;
+
+  // Return true if the stack is empty.
+  boolean isEmpty();
+
+  // Return true if the stack is full.
+  boolean isFull();
+}
+
+// An exception for stack-full errors.
+class StackFullException extends Exception {
+  int size;
+
+  StackFullException(int s) {
+    super("Stack Full");
+    size = s;
+  }
+
+  public String toString() {
+    return "\nStack is full. Maximum size is " + size;
+  }
+}
+
+// An exception for stack-empty errors.
+class StackEmptyException extends Exception {
+
+  StackEmptyException() {
+    super("Stack Empty");
+  }
+
+  public String toString() {
+    return "\nStack is empty.";
+  }
+}
+
+// A simple generic fixed-length stack.
+class GenSimpleStack<T> implements IGenSimpleStack<T> {
+  private T data[]; // this array holds the stack
+  private int tos; // index of top of stack
+
+  // Construct an empty stack with the given array as storage.
+ GenSimpleStack(T[] arrayRef) {
+    data = arrayRef ;
+    tos = 0;
+  }
+
+  // Push an item onto the stack.
+  public void push(T obj) throws StackFullException {
+    if(isFull())
+      throw new StackFullException(data.length);
+
+    data[tos] = obj;
+    tos++;
+  }
+
+  // Pop an item from the stack.
+  public T pop() throws StackEmptyException {
+    if(isEmpty())
+      throw new StackEmptyException();
+
+    tos--;
+    return data[tos];
+  }
+
+  // Return true if the stack is empty.
+  public boolean isEmpty() {
+    return tos==0;
+  }
+
+  // Return true if the stack is full.
+  public boolean isFull() {
+    return tos==data.length;
+  }
+}
+
+/*
+    Try This 14-1
+
+    Demonstrate a simple generic stack class.
+*/
+
+class GenSimpleStackDemo {
+  public static void main(String[] args) {
+    int i;
+    //Integer[] nums = new Integer[5];
+    //String[] strs = new String[3];
+    Student[] st =new Student[3];
+
+    // first create a stack for integers
+   /* GenSimpleStack<Integer> intStack = new GenSimpleStack<Integer>(nums);
+
+    System.out.println("Demonstrating Integer stack.");
+
+    // use intStack
+    try {
+
+      System.out.print("Pushing: ");
+      // push integers onto intStack
+      for(i = 0; !intStack.isFull(); i++) {
+        System.out.print(i+"\t");
+        intStack.push(i);
+      }
+
+      System.out.println();
+
+      // pop integers off intStack
+      System.out.print("Popping: ");
+      while(!intStack.isEmpty())
+        System.out.print(intStack.pop()+"\t");
+
+      System.out.println();
+    } catch (StackFullException exc) {
+      System.out.println(exc);
+    } catch (StackEmptyException exc) {
+      System.out.println(exc);
+    }
+
+
+    // next, create a stack for strings
+    GenSimpleStack<String> strStack = new GenSimpleStack<String>(strs);
+
+    System.out.println("\nDemonstrating String stack.");
+
+    // now, use strStack
+    try {
+
+      System.out.println("Pushing: alpha beta gamma");
+
+      // push strings onto strStack
+      strStack.push("alpha");
+      strStack.push("beta");
+      strStack.push("gamma");
+
+      // pop Strings off strStack
+      System.out.print("Popping: ");
+      while(!strStack.isEmpty())
+        System.out.print(strStack.pop() + " ");
+
+      System.out.println();
+    } catch (StackFullException exc) {
+      System.out.println(exc);
+    } catch (StackEmptyException exc) {
+      System.out.println(exc);
+    }    System.out.println();*/
+  
+GenSimpleStack<Student> stck = new GenSimpleStack<Student>(st);
+
+    System.out.println("\nDemonstrating Student stack.");
+
+    // now, use strStack
+    try {
+
+      System.out.println("Pushing: Student");
+
+      // push strings onto strStack
+      stck.push(new Student(5,"anand"));
+      stck.push(new Student(6,"anu"));
+      stck.push(new Student(7,"anil"));
+
+      // pop Strings off strStack
+      System.out.print("Popping: ");
+      while(!stck.isEmpty())
+        System.out.print(stck.pop() + " ");
+
+      System.out.println();
+    } catch (StackFullException exc) {
+      System.out.println(exc);
+    } catch (StackEmptyException exc) {
+      System.out.println(exc);
+    }    System.out.println();
+  }
+}
+
+
+//Q3
+
+
+
+class ListNode< T >
+{
+ T data;
+ ListNode<T> nextNode;
+ ListNode( T object )
+ {
+    this( object, null );
+ } // end ListNode one-argument constructor
+
+ // constructor creates ListNode that refers to the specified
+ // object and to the next ListNode
+ ListNode( T object, ListNode< T > node )
+ {
+     data = object;
+     nextNode = node;
+ }
+ T getData()
+ {
+    return data; // return item in this node
+ }
+ ListNode< T > getNext()
+ {
+    return nextNode; // get next node
+ }
+}
+
+
+
+class List< T >
+{
+  private ListNode< T > firstNode;
+  private String name;
+  public List() {
+    this( "list" );
+  } // end List no-argument constructor
+ // constructor creates an empty List with a name
+  public List( String listName )
+  {
+    name = listName;
+    firstNode = null;
+  }
+  public void insertAtFront( T insertItem )
+  {
+     if ( isEmpty() ) // firstNode and lastNode refer to same object
+     firstNode =  new ListNode< T >( insertItem );
+     else // firstNode refers to new node
+     firstNode = new ListNode< T >( insertItem, firstNode );
+  }
+  public void insertAtBack( T insertItem )
+  {
+    if ( isEmpty() ) // firstNode and lastNode refer to same object
+    firstNode = new ListNode< T >( insertItem );
+    else 
+    {   ListNode<T> temp=firstNode;
+        while(temp.nextNode!=null)
+        temp=temp.nextNode;
+
+        temp.nextNode = new ListNode< T >( insertItem );
+     }
+   }
+   public boolean isEmpty()
+   {
+      return firstNode == null; // return true if list is empty
+    }
+   
+    public void print()
+    {
+      if ( isEmpty() )
+      {
+        return;
+       }
+      ListNode< T > current = firstNode;
+
+      // while not at end of list, output current node's data
+      while ( current != null )
+      {
+        System.out.printf( "%s ", current.data );
+        current = current.nextNode;
+       } // end while
+
+    System.out.println( "\n" );
+   }
+}
+ 
+
+public class ListDemo
+{
+   public static void main( String[] args )
+   {
+      List< Integer > list = new List< Integer >();
+      list.insertAtFront( -1 );
+      list.print();
+      list.insertAtFront( 0 );
+      list.print();
+      list.insertAtFront( 1 );
+      list.print();
+      list.insertAtFront( 2 );
+      list.print();
+      list.insertAtFront( 3 );
+      list.print();
+      list.insertAtFront( 3 );
+      list.print();
+      list.insertAtBack( 5 );
+      list.print();
+      list.insertAtBack( 6 );
+      list.print();
+      list.insertAtBack( 7 );
+      list.print();
+   }
+}
+
+//Q4
+
+// Use a wildcard.
+class NumericFns<T extends Number> {
+   T num;
+// Pass the constructor a reference to
+// a numeric object.
+   NumericFns(T n) {
+     num = n;
+   }
+// Return the reciprocal.
+   double reciprocal() {
+      return 1 / num.doubleValue();
+   }
+// Return the fractional component.
+   double fraction() {
+      return num.doubleValue() - num.intValue();
+   }
+// Determine if the absolute values of two
+// objects are the same.
+   boolean absEqual(NumericFns<?> ob) {
+       if(Math.abs(num.doubleValue()) ==
+                 Math.abs(ob.num.doubleValue())) return true;
+       return false;
+   }
+// ...
+}
+// Demonstrate a wildcard.
+class WildcardDemo {
+   public static void main(String args[]) {
+       NumericFns<Integer> iOb = new NumericFns<Integer>(6);
+       NumericFns<Double> dOb = new NumericFns<Double>(-6.0);
+       NumericFns<Long> lOb = new NumericFns<Long>(5L);
+       System.out.println("Testing iOb and dOb.");
+       if(iOb.absEqual(dOb))
+          System.out.println("Absolute values are equal.");
+       else
+          System.out.println("Absolute values differ.");
+       System.out.println();
+       System.out.println("Testing iOb and lOb.");
+       if(iOb.absEqual(lOb))
+          System.out.println("Absolute values are equal.");
+       else
+          System.out.println("Absolute values differ.");
+    }
+}
