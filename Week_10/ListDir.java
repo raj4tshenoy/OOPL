@@ -24,7 +24,9 @@ class ListDir{
          LsPrint(arr,++index, level);
 	}
 	public static void main(String[] args) {
-		String dirpath = "/home/student/RajatShenoy/";
+		Scanner in = new Scanner(System.in);
+		System.out.println("Enter directory: ");
+		String dirpath = in.next();
 		File dir = new File(dirpath);
 		if(dir.exists() && dir.isDirectory()){
 			File list[] = dir.listFiles();
