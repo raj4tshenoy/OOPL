@@ -4,7 +4,7 @@ import java.io.File;
 
 class ListDir{
 	static void LsPrint(File[] arr,int index,int level){
-		if(index == arr.length) 
+		if(index == arr.length) //If index has crossed the total number of files in directory
              return;
            
          // for files 
@@ -23,6 +23,8 @@ class ListDir{
          // recursion for main directory 
          LsPrint(arr,++index, level);
 	}
+
+	///////////////MAIN FUNCTION/////////////////////////////////////////////
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Enter directory: ");
@@ -41,3 +43,11 @@ class ListDir{
 	}
 	
 }
+
+/*****************************************************
+
+Script Created on: 18-10-21 21:00 - Verified Working
+Script Written by: RAJAT SHENOY
+Github: https://www.github.com/raj4tshenoy/OOPL.git
+
+*****************************************************/
